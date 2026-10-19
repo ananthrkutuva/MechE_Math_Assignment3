@@ -1,3 +1,4 @@
+close all;
 % local truncation error experiment for all four methods
 % starts ON the analytical solution at t_ref, takes one step of size h,
 % and compares that to the analytical solution at t_ref + h
@@ -67,8 +68,8 @@ for test_num = 1:2
 end
 
 % blue/red for the explicit ones, green/purple for the implicit ones
-colors = [0.00,0.45,0.74; 0.47,0.67,0.19; 0.85,0.33,0.10; 0.49,0.18,0.56];
-diff_color = [0.25,0.25,0.25];
+colors = [0.00, 0.25, 0.85; 0.2235, 1.0000, 0.0784; 0.90, 0.15, 0.05; 1, 1, 0];
+diff_color = [0,0.6,0.6];
 
 % plot 1: forward euler and explicit midpoint with fit lines, plus the
 % difference |X(t+h)-X(t)| to compare against
@@ -76,12 +77,12 @@ fig1 = figure('Color','w','Position',[100,100,1000,700]);
 loglog(h_list,diff_list01,'o','Color',diff_color,'MarkerFaceColor',diff_color,'MarkerSize',6, ...
     'DisplayName','$|X(t+h)-X(t)|$ data');
 hold on;
-loglog(h_list,k_list01(1)*h_list.^p_list(1,1),'-','Color',diff_color,'LineWidth',2, ...
+loglog(h_list,k_list01(1)*h_list.^p_list(1,1),'-','Color','k','LineWidth',2, ...
     'DisplayName',sprintf('$|X(t+h)-X(t)|$ fit, $p$ = %.2f',p_list(1,1)));
 for m = [1,3]
     loglog(h_list,error_list01(m,:),'o','Color',colors(m,:),'MarkerFaceColor',colors(m,:),'MarkerSize',6, ...
         'DisplayName',[method_names{m},' data']);
-    loglog(h_list,k_list01(m+1)*h_list.^p_list(m+1,1),'-','Color',colors(m,:),'LineWidth',2, ...
+    loglog(h_list,k_list01(m+1)*h_list.^p_list(m+1,1),'-','Color','k','LineWidth',2, ...
         'DisplayName',sprintf('%s fit, $p$ = %.2f',method_names{m},p_list(m+1,1)));
 end
 grid on; box on;
@@ -101,7 +102,7 @@ marker_list = {'o','s','o','s'};
 size_list = [9,5,9,5];
 for m = 1:4
     loglog(h_list,error_list01(m,:),marker_list{m},'Color',colors(m,:),'MarkerFaceColor',colors(m,:), ...
-        'MarkerSize',size_list(m),'DisplayName',method_names{m});
+        'MarkerSize',size_list(m),'MarkerEdgeColor','k','DisplayName',method_names{m});
     hold on;
 end
 grid on; box on;

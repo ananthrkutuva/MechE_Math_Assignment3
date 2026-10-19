@@ -1,3 +1,4 @@
+close all;
 % global truncation error experiment for all four methods
 % integrates each test IVP over t = [0,5] for 40 step sizes (even in log
 % space) and compares the last point to the analytical solution at t = 5
@@ -65,7 +66,7 @@ for test_num = 1:2
 end
 
 % blue/red for the explicit ones, green/purple for the implicit ones
-colors = [0.00,0.45,0.74; 0.47,0.67,0.19; 0.85,0.33,0.10; 0.49,0.18,0.56];
+colors = [0.00, 0.25, 0.85; 0.2235, 1.0000, 0.0784; 0.90, 0.15, 0.05; 1, 1, 0];
 marker_list = {'o','s','o','s'};
 size_list = [9,5,9,5];
 
@@ -75,7 +76,7 @@ for m = [1,3]
     loglog(h_avg_list01(m,:),error_list01(m,:),'o','Color',colors(m,:),'MarkerFaceColor',colors(m,:), ...
         'MarkerSize',7,'DisplayName',[method_names{m},' data']);
     hold on;
-    loglog(h_avg_list01(m,:),k_h01(m)*h_avg_list01(m,:).^p_h(m,1),'-','Color',colors(m,:),'LineWidth',2, ...
+    loglog(h_avg_list01(m,:),k_h01(m)*h_avg_list01(m,:).^p_h(m,1),'-','Color','k','LineWidth',2, ...
         'DisplayName',sprintf('%s fit, $p$ = %.2f',method_names{m},p_h(m,1)));
 end
 grid on; box on;
@@ -90,7 +91,7 @@ exportgraphics(fig1,fullfile(fig_dir,'global_truncation_step_size_explicit_fit.p
 fig2 = figure('Color','w','Position',[100,100,1000,700]);
 for m = 1:4
     loglog(h_avg_list01(m,:),error_list01(m,:),marker_list{m},'Color',colors(m,:),'MarkerFaceColor',colors(m,:), ...
-        'MarkerSize',size_list(m),'DisplayName',method_names{m});
+        'MarkerSize',size_list(m),'MarkerEdgeColor', 'k', 'DisplayName',method_names{m});
     hold on;
 end
 grid on; box on;
@@ -109,7 +110,7 @@ for m = [1,3]
     loglog(calls_list01(m,:),error_list01(m,:),'o','Color',colors(m,:),'MarkerFaceColor',colors(m,:), ...
         'MarkerSize',7,'DisplayName',[method_names{m},' data']);
     hold on;
-    loglog(calls_list01(m,:),k_calls01(m)*calls_list01(m,:).^p_calls(m,1),'-','Color',colors(m,:),'LineWidth',2, ...
+    loglog(calls_list01(m,:),k_calls01(m)*calls_list01(m,:).^p_calls(m,1),'-','Color','k','LineWidth',2, ...
         'DisplayName',sprintf('%s fit, $p$ = %.2f',method_names{m},p_calls(m,1)));
 end
 grid on; box on;
