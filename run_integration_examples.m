@@ -1,3 +1,4 @@
+close all;
 % runs each integration method on the first test IVP (eqn 5) for a few
 % step sizes and plots them against the analytical solution x(t) = cos(t)
 % one figure per method, the numerical solution should land closer and
@@ -21,7 +22,7 @@ im_integration = @(h_ref) fixed_step_integration(@rate_func01,@implicit_midpoint
 
 % forward euler goes unstable on this IVP once h > 0.4 (see the stability
 % part) so its biggest step stays under that
-plot_example(fe_integration,[0.38,0.2,0.1,0.05],tspan,'Forward Euler', ...
+plot_example(fe_integration,[0.435,0.42,0.1],tspan,'Forward Euler', ...
     fullfile(fig_dir,'forward_euler_example_integration.png'));
 plot_example(em_integration,[0.35,0.2,0.1,0.05],tspan,'Explicit Midpoint', ...
     fullfile(fig_dir,'explicit_midpoint_example_integration.png'));
@@ -61,7 +62,7 @@ function plot_example(integration_func,h_ref_list,tspan,method_name,file_name)
 
     % cos(t) runs through every corner, so leave room above it for the legend
     xlim(tspan);
-    ylim([-1.25,2.1]);
+    ylim([-1.25,2]);
     xlabel('Time, $t$ (-)','Interpreter','latex');
     ylabel('Solution, $x(t)$ (-)','Interpreter','latex');
     title(sprintf('%s Approximations of $\\dot{x} = -5x + 5\\cos(t) - \\sin(t)$',method_name), ...
